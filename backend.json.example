@@ -1,0 +1,6 @@
+{
+    "STORAGEACCOUNTNAME": "xxx",
+    "CONTAINERNAME": "tfstate",
+    "TFSTATE_RG": "tfstate",
+    "ACCESS_KEY": "yyy=="
+}

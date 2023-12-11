@@ -1,0 +1,18 @@
+state_sa_name = "xxx"
+container_name = "tfstate"
+access_key = "yyy=="
+hub_location="westus3"
+ai_location="eastus"
+aks_admin_group = "App Admin Team"
+aks_user_group = "App Dev Team"
+onpremise_address_space = ["192.168.0.0/16"]
+onpremise_gateway_public_ip_address = "127.0.0.1"
+azurerm_log_analytics_workspace_id = "/subscriptions/<guid>/resourceGroups/Observability/providers/Microsoft.OperationalInsights/workspaces/<name>"
+hub_prefix= "LZ"
+lz_prefix = "LZ"
+aks_private_dns_zone_name = "privatelink.XXXXXXXXX.azmk8s.io" // change "XXXXXXXXX" the region to match where your aks cluster is deployed.
+network_plugin = "azure"
+prefix = "aks"
+admin_password= "xxxyyyzzz"
+admin_username= "vmadmin"
+vm_size= "Standard_D2s_v4"
