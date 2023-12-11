@@ -43,7 +43,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "postgresql" {
   resource_group_name   = data.terraform_remote_state.existing-lz.outputs.lz_rg_name
 }
 
-resource "azurerm_postgresql_flexible_server" "default" {
+resource "azurerm_postgresql_flexible_server" "postgresql_flexible_server" {
   name                   = "postgresql-${random_string.random.id}"
   resource_group_name    = data.terraform_remote_state.existing-lz.outputs.lz_rg_name
   location               = data.terraform_remote_state.existing-lz.outputs.lz_rg_location
@@ -58,4 +58,11 @@ resource "azurerm_postgresql_flexible_server" "default" {
   backup_retention_days  = 7
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.postgresql]
+}
+
+resource "azurerm_postgresql_flexible_server_database" "database" {
+  name      = "db${random_string.random.id}"
+  server_id = azurerm_postgresql_flexible_server.postgresql_flexible_server.id
+  collation = "en_US.utf8"
+  charset   = "UTF8"
 }
