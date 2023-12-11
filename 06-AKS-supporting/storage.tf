@@ -48,7 +48,7 @@ resource "azurerm_private_endpoint" "storage_endpoint" {
   name                = "${azurerm_storage_account.storage_account.name}-ep"
   location            = data.terraform_remote_state.existing-lz.outputs.lz_rg_location
   resource_group_name = data.terraform_remote_state.existing-lz.outputs.lz_rg_name
-  subnet_id           = data.terraform_remote_state.existing-hub.outputs.hub_vnet_id
+  subnet_id           = data.terraform_remote_state.existing-lz.outputs.lz_vnet_id
 
   private_service_connection {
     name                           = "${azurerm_storage_account.storage_account.name}-privateserviceconnection"
