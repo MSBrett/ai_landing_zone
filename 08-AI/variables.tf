@@ -16,6 +16,8 @@ variable "ai_location" {
 
 variable "state_sa_name" {}
 
+variable "lz_prefix" {}
+
 variable "container_name" {}
 
 variable "access_key" {

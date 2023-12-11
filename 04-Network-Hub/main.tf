@@ -6,7 +6,7 @@
 # ----------------------
 
 resource "azurerm_resource_group" "rg" {
-  name     = "LZ-HUB"
+  name     = "${var.hub_prefix}-HUB"
   location = var.hub_location
 }
 

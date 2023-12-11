@@ -1,7 +1,7 @@
 # Resource Group for Landing Zone Networking
 # This RG uses the same region location as the Hub.
 resource "azurerm_resource_group" "aks-rg" {
-  name     = "LZ-AKS"
+  name     = "${var.lz_prefix}-AKS"
   location = data.terraform_remote_state.existing-hub.outputs.hub_rg_location
 }
 

@@ -10,9 +10,7 @@ variable "tags" {
   }
 }
 
-variable "lz_prefix" {
-  default = "aks"
-}
+variable "lz_prefix" {}
 
 # Used to retrieve outputs from other state files.
 # The "access_key" variable is sensitive and should be passed using
