@@ -15,6 +15,7 @@ resource "azurerm_storage_account" "storage_account" {
   network_rules {
     default_action             = "Deny"
     bypass                     = ["AzureServices"]
+    ip_rules                   = [var.onpremise_gateway_public_ip_address]
   }
 }
 
