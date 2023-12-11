@@ -12,6 +12,10 @@ resource "azurerm_storage_account" "storage_account" {
   account_tier             = "Premium"
   account_replication_type = "LRS"
   account_kind             = "FileStorage"
+  network_rules {
+    default_action             = "Deny"
+    bypass                     = ["AzureServices"]
+  }
 }
 
 resource "azurerm_storage_share" "share1" {
@@ -45,13 +49,13 @@ resource "azurerm_private_dns_zone_virtual_network_link" "hub_storage_account" {
 # storage Private Endpoint
 
 resource "azurerm_private_endpoint" "storage_endpoint" {
-  name                = "${azurerm_storage_account.storage_account.name}-ep"
+  name                = "storage-ep"
   location            = data.terraform_remote_state.existing-lz.outputs.lz_rg_location
   resource_group_name = data.terraform_remote_state.existing-lz.outputs.lz_rg_name
-  subnet_id           = data.terraform_remote_state.existing-lz.outputs.lz_vnet_id
+  subnet_id           = data.terraform_remote_state.existing-lz.outputs.aks_subnet_id
 
   private_service_connection {
-    name                           = "${azurerm_storage_account.storage_account.name}-privateserviceconnection"
+    name                           = azurerm_storage_account.storage_account.name
     private_connection_resource_id = azurerm_storage_account.storage_account.id
     subresource_names              = ["file"]
     is_manual_connection           = false
