@@ -75,7 +75,27 @@ resource "azurerm_role_assignment" "aks-to-vnet" {
   scope                = data.terraform_remote_state.existing-lz.outputs.lz_vnet_id
   role_definition_name = "Network Contributor"
   principal_id         = each.value.principal_id
+}
 
+resource "azurerm_role_assignment" "aks-to-nsg" {
+  for_each             = azurerm_user_assigned_identity.mi-aks-cp
+  scope                = data.terraform_remote_state.existing-lz.outputs.aks_nsg_id
+  role_definition_name = "Contributor"
+  principal_id         = each.value.principal_id
+}
+
+resource "azurerm_role_assignment" "aks-to-storage" {
+  for_each             = azurerm_user_assigned_identity.mi-aks-cp
+  scope                = data.terraform_remote_state.aks-support.outputs.storage_account_id
+  role_definition_name = "Contributor"
+  principal_id         = each.value.principal_id
+}
+
+resource "azurerm_role_assignment" "aks-to-storage-nfs" {
+  for_each             = azurerm_user_assigned_identity.mi-aks-cp
+  scope                = data.terraform_remote_state.aks-support.outputs.storage_account_id
+  role_definition_name = "Storage File Data Privileged Contributor"
+  principal_id         = each.value.principal_id
 }
 
 # Role assignment to to create Private DNS zone for cluster
@@ -107,7 +127,11 @@ module "aks" {
   k8s_version         = each.value.k8s_version
   depends_on = [
     azurerm_role_assignment.aks-to-vnet,
-    azurerm_role_assignment.aks-to-dnszone
+    azurerm_role_assignment.aks-to-dnszone,
+    azurerm_role_assignment.aks-to-rt,
+    azurerm_role_assignment.aks-to-nsg,
+    azurerm_role_assignment.aks-to-storage,
+    azurerm_role_assignment.aks-to-storage-nfs
   ]
 }
 

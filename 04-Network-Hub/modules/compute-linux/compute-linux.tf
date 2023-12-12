@@ -8,6 +8,9 @@ resource "azurerm_linux_virtual_machine" "compute" {
   admin_password                  = var.admin_password
   disable_password_authentication = var.disable_password_authentication //Set to true if using SSH key
   tags                            = var.tags
+  patch_assessment_mode           = "AutomaticByPlatform"
+  patch_mode                      = "AutomaticByPlatform"
+  bypass_platform_safety_checks_on_user_schedule_enabled = true
 
   network_interface_ids = [
     azurerm_network_interface.compute.id

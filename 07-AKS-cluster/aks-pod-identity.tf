@@ -24,6 +24,10 @@ resource "azurerm_role_assignment" "aks_vm_contributor" {
   scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourcegroups/${each.value.node_pool_rg}"
   role_definition_name = "Virtual Machine Contributor"
   principal_id         = each.value.kubelet_id
+
+  lifecycle {
+    ignore_changes = [ scope ]
+  }
 }
 
 # Azure Key Vault Access Policy for Managed Identity for AAD Pod Identity

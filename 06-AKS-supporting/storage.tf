@@ -6,17 +6,31 @@ resource "random_string" "random" {
 }
 
 resource "azurerm_storage_account" "storage_account" {
-  name                     = "stor${random_string.random.id}"
-  resource_group_name      = data.terraform_remote_state.existing-lz.outputs.lz_rg_name
-  location                 = data.terraform_remote_state.existing-lz.outputs.lz_rg_location
-  account_tier             = "Premium"
-  account_replication_type = "LRS"
-  account_kind             = "FileStorage"
+  name                            = "stor${random_string.random.id}"
+  resource_group_name             = data.terraform_remote_state.existing-lz.outputs.lz_rg_name
+  location                        = data.terraform_remote_state.existing-lz.outputs.lz_rg_location
+  account_tier                    = "Premium"
+  account_replication_type        = "LRS"
+  account_kind                    = "FileStorage"
+  allow_nested_items_to_be_public = false
+  enable_https_traffic_only       = false
+  
+
   network_rules {
     default_action             = "Deny"
     bypass                     = ["AzureServices"]
     ip_rules                   = [var.onpremise_gateway_public_ip_address]
   }
+
+  lifecycle {
+    ignore_changes = [
+      network_rules[0].private_link_access
+    ]
+  }
+}
+
+output "storage_account_id" {
+  value = azurerm_storage_account.storage_account.id
 }
 
 resource "azurerm_storage_share" "share1" {

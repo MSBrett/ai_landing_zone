@@ -9,6 +9,11 @@ resource "azurerm_subnet" "aks" {
   address_prefixes                          = ["10.1.16.0/20"]
   private_endpoint_network_policies_enabled = true
 
+  lifecycle {
+    ignore_changes = [
+      service_endpoints
+    ]
+  }
 }
 
 output "aks_subnet_id" {
@@ -30,4 +35,8 @@ resource "azurerm_subnet_network_security_group_association" "subnet" {
 resource "azurerm_subnet_route_table_association" "rt_association" {
   subnet_id      = azurerm_subnet.aks.id
   route_table_id = azurerm_route_table.route_table.id
+}
+
+output "aks_nsg_id"{
+  value = azurerm_network_security_group.aks-nsg.id
 }

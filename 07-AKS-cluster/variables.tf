@@ -26,3 +26,7 @@ default = "azure"
 variable "pod_cidr" {
     default = null
 }
+
+variable "userpool_vm_size" {
+    default = "Standard_D8s_v4"
+}
