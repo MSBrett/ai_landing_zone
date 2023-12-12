@@ -30,3 +30,7 @@ variable "pod_cidr" {
 variable "userpool_vm_size" {
     default = "Standard_D8s_v4"
 }
+
+variable "usergpupool_vm_size" {
+    default = "Standard_NC24ads_A100_v4"
+}
