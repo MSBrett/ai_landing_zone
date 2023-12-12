@@ -66,4 +66,6 @@ resource "azurerm_private_endpoint" "storage_endpoint" {
     name = "storage-endpoint-zone"
     private_dns_zone_ids = [azurerm_private_dns_zone.storage_account.id]
   }
+
+  depends_on = [ azurerm_storage_share.share1 ]
 }
