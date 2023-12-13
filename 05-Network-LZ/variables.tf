@@ -12,6 +12,8 @@ variable "tags" {
 
 variable "lz_prefix" {}
 
+variable "lz_location" {}
+
 # Used to retrieve outputs from other state files.
 # The "access_key" variable is sensitive and should be passed using
 # a .TFVARS file or other secure method.

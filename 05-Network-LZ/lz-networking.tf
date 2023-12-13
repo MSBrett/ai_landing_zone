@@ -2,7 +2,7 @@
 # This RG uses the same region location as the Hub.
 resource "azurerm_resource_group" "aks-rg" {
   name     = "${var.lz_prefix}-AKS"
-  location = data.terraform_remote_state.existing-hub.outputs.hub_rg_location
+  location = var.lz_location
 }
 
 output "lz_rg_location" {
