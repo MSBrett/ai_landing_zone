@@ -53,6 +53,21 @@ resource "azurerm_network_interface" "compute" {
   }
 }
 
+resource "azurerm_dev_test_global_vm_shutdown_schedule" "vm_shutdown_schedule" {
+  virtual_machine_id = azurerm_linux_virtual_machine.compute.id
+  location           = var.location
+  enabled            = true
+
+  daily_recurrence_time = "2000"
+  timezone              = "Pacific Standard Time"
+
+
+  notification_settings {
+    enabled         = false
+   
+  }
+ }
+
 output "vm_private_ip_address" {
   value = azurerm_network_interface.compute.ip_configuration[0].private_ip_address
 }
