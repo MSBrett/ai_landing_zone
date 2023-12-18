@@ -13,52 +13,52 @@ try {
     push-location
     if ($init)
     {
-        tf -init .\03-AAD-import
-        tf -init .\04-Network-Hub
-        tf -init .\05-Network-LZ
-        tf -init .\06-AKS-supporting
-        tf -init .\07-AKS-cluster
-        tf -init .\08-AI
+        tf -init .\01-AAD-Import
+        tf -init .\02-Network-Hub
+        tf -init .\03-Network-LZ
+        tf -init .\04-Supporting-Services
+        tf -init .\05-AKS-Cluster
+        tf -init .\06-AI-Services
     }
 
     if ($plan)
     {
-        tf -plan .\03-AAD-import
-        tf -plan .\04-Network-Hub
-        tf -plan .\05-Network-LZ
-        tf -plan .\06-AKS-supporting
-        tf -plan .\07-AKS-cluster
-        tf -plan .\08-AI
+        tf -plan .\01-AAD-Import
+        tf -plan .\02-Network-Hub
+        tf -plan .\03-Network-LZ
+        tf -plan .\04-Supporting-Services
+        tf -plan .\05-AKS-Cluster
+        tf -plan .\06-AI-Services
     }
 
     if ($apply)
     {
-        tf -apply .\03-AAD-import
-        tf -apply .\04-Network-Hub
-        tf -apply .\05-Network-LZ
-        tf -apply .\06-AKS-supporting
-        tf -apply .\07-AKS-cluster
-        tf -apply .\08-AI
+        tf -apply .\01-AAD-Import
+        tf -apply .\02-Network-Hub
+        tf -apply .\03-Network-LZ
+        tf -apply .\04-Supporting-Services
+        tf -apply .\05-AKS-Cluster
+        tf -apply .\06-AI-Services
     }
 
     if ($refresh)
     {
-        tf -refresh .\03-AAD-import
-        tf -refresh .\04-Network-Hub
-        tf -refresh .\05-Network-LZ
-        tf -refresh .\06-AKS-supporting
-        tf -refresh .\07-AKS-cluster
-        tf -refresh .\08-AI
+        tf -refresh .\01-AAD-Import
+        tf -refresh .\02-Network-Hub
+        tf -refresh .\03-Network-LZ
+        tf -refresh .\04-Supporting-Services
+        tf -refresh .\05-AKS-Cluster
+        tf -refresh .\06-AI-Services
     }
 
     if ($destroy)
     {
-        tf -destroy .\08-AI
-        tf -destroy .\07-AKS-cluster
-        tf -destroy .\06-AKS-supporting
-        tf -destroy .\05-Network-LZ
-        tf -destroy .\04-Network-Hub
-        tf -destroy .\03-AAD-import
+        tf -destroy .\06-AI-Services
+        tf -destroy .\05-AKS-Cluster
+        tf -destroy .\04-Supporting-Services
+        tf -destroy .\03-Network-LZ
+        tf -destroy .\02-Network-Hub
+        #tf -destroy .\03-AAD-import
     }
 }
 catch {
