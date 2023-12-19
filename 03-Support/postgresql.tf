@@ -1,5 +1,5 @@
 resource "azurerm_network_security_group" "postgresql_nsg" {
-  name                = "postgresql-${random_integer.deployment.result}-nsg"
+  name                = "workload-vnet-postgresqlSubnet-nsg"
   location            = data.terraform_remote_state.network.outputs.workload_rg_location
   resource_group_name = data.terraform_remote_state.network.outputs.workload_rg_name
 }

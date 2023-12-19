@@ -67,26 +67,3 @@ resource "azurerm_key_vault_access_policy" "aks-aad_cp_identity-rt" {
   ]
 }
 
-# # Associate Route Table to AKS Subnet
-resource "azurerm_route_table" "aks_route_table" {
-  name                          = "aks-route-table"
-  resource_group_name           = data.terraform_remote_state.network.outputs.workload_rg_name
-  location                      = data.terraform_remote_state.network.outputs.workload_rg_location
-  disable_bgp_route_propagation = false
-}
-
-resource "azurerm_subnet_route_table_association" "rt_association" {
-  subnet_id      = azurerm_subnet.aks.id
-  route_table_id = azurerm_route_table.aks_route_table.id
-}
-
-output "aks_route_table_id"{
-  value = azurerm_route_table.aks_route_table.id
-}
-
-resource "azurerm_role_assignment" "aks_to_rt" {
-  for_each             = azurerm_user_assigned_identity.mi_aks_cp
-  scope                = azurerm_route_table.aks_route_table.id
-  role_definition_name = "Contributor"
-  principal_id         = each.value.principal_id
-}

@@ -13,52 +13,52 @@ try {
     push-location
     if ($init)
     {
-        tf -init .\01-AAD-Import
-        tf -init .\02-Network-Hub
-        tf -init .\03-Network-LZ
-        tf -init .\04-Supporting-Services
-        tf -init .\05-AKS-Cluster
-        tf -init .\06-AI-Services
+        tf -init .\00-Subnets
+        tf -init .\01-AAD
+        tf -init .\02-Network
+        tf -init .\03-Support
+        tf -init .\04-AI
+        tf -init .\05-AKS
     }
 
     if ($plan)
     {
-        tf -plan .\01-AAD-Import
-        tf -plan .\02-Network-Hub
-        tf -plan .\03-Network-LZ
-        tf -plan .\04-Supporting-Services
-        tf -plan .\05-AKS-Cluster
-        tf -plan .\06-AI-Services
+        tf -plan .\00-Subnets
+        tf -plan .\01-AAD
+        tf -plan .\02-Network
+        tf -plan .\03-Support
+        tf -plan .\04-AI
+        tf -plan .\05-AKS
     }
 
     if ($apply)
     {
-        tf -apply .\01-AAD-Import
-        tf -apply .\02-Network-Hub
-        tf -apply .\03-Network-LZ
-        tf -apply .\04-Supporting-Services
-        tf -apply .\05-AKS-Cluster
-        tf -apply .\06-AI-Services
+        tf -apply .\00-Subnets
+        tf -apply .\01-AAD
+        tf -apply .\02-Network
+        tf -apply .\03-Support
+        tf -apply .\04-AI
+        tf -apply .\05-AKS
     }
 
     if ($refresh)
     {
-        tf -refresh .\01-AAD-Import
-        tf -refresh .\02-Network-Hub
-        tf -refresh .\03-Network-LZ
-        tf -refresh .\04-Supporting-Services
-        tf -refresh .\05-AKS-Cluster
-        tf -refresh .\06-AI-Services
+        tf -refresh .\00-Subnets
+        tf -refresh .\01-AAD
+        tf -refresh .\02-Network
+        tf -refresh .\03-Support
+        tf -refresh .\04-AI
+        tf -refresh .\05-AKS
     }
 
     if ($destroy)
     {
-        tf -destroy .\06-AI-Services
-        tf -destroy .\05-AKS-Cluster
-        tf -destroy .\04-Supporting-Services
-        tf -destroy .\03-Network-LZ
-        tf -destroy .\02-Network-Hub
-        #tf -destroy .\03-AAD-import
+        tf -destroy .\05-AKS
+        tf -destroy .\04-AI
+        tf -destroy .\03-Support
+        tf -destroy .\02-Network
+        #tf -destroy .\01-AAD
+        #tf -destroy .\00-Subnets
     }
 }
 catch {

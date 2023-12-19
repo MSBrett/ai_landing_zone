@@ -161,3 +161,8 @@ variable "tags" {
 variable "allocation_method" {
   default = "Static"
 }
+
+resource "azurerm_subnet_nat_gateway_association" "devSubnet" {
+  subnet_id      = azurerm_subnet.dev_subnet.id
+  nat_gateway_id = azurerm_nat_gateway.nat_gateway.id
+}
