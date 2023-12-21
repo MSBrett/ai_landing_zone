@@ -9,22 +9,6 @@ output "HubAddressSpace" {
   value = local.HubAddressSpace[0]
 }
 
-output "GatewaySubnet" {
-  value = cidrsubnet(local.HubAddressSpace[0], 2, 0)
-}
-
-output "AzureBastionSubnet" {
-  value = cidrsubnet(local.HubAddressSpace[0], 2, 1)
-}
-
-output "AzureFirewallManagementSubnet" {
-  value = cidrsubnet(local.HubAddressSpace[0], 2, 2)
-}
-
-output "AzureFirewallSubnet" {
-  value = cidrsubnet(local.HubAddressSpace[0], 2, 3)
-}
-
 # WORKLOAD
 output "aksSubnet" {
   value = cidrsubnet(local.SpokeAddressSpace[0], 1, 1)
@@ -48,6 +32,22 @@ output "serviceSubnet" {
 
 output "appgwSubnet" {
   value = cidrsubnet(local.SpokeAddressSpace[0], 7, 4)
+}
+
+output "AzureBastionSubnet" {
+  value = cidrsubnet(local.SpokeAddressSpace[0], 7, 5)
+}
+
+output "GatewaySubnet" {
+  value = cidrsubnet(local.SpokeAddressSpace[0], 7, 6)
+}
+
+output "AzureFirewallManagementSubnet" {
+  value = cidrsubnet(local.SpokeAddressSpace[0], 7, 7)
+}
+
+output "AzureFirewallSubnet" {
+  value = cidrsubnet(local.SpokeAddressSpace[0], 7, 8)
 }
 
 output "WorkloadAddressSpace" {
