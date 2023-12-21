@@ -20,6 +20,7 @@ resource "azurerm_bastion_host" "bastion" {
   resource_group_name = data.terraform_remote_state.network.outputs.workload_rg_name
   location            = data.terraform_remote_state.network.outputs.workload_rg_location
   sku                 = "Standard"
+  
 
   ip_configuration {
     name                 = "configuration"
