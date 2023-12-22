@@ -6,7 +6,7 @@ Function tf {
         [switch]$plan,
         [switch]$destroy,
         [switch]$refresh,
-        [string]$backend=".\backend.json"
+        [string]$backend="./backend.json"
     )
 
     Push-Location
@@ -29,25 +29,25 @@ Function tf {
         if ($refresh)
         {
             Write-Output "Refresh"
-            terraform refresh -var-file="..\terraform.tfvars" -var "access_key=$ACCESS_KEY" -compact-warnings
+            terraform refresh -var-file="../terraform.tfvars" -var "access_key=$ACCESS_KEY" -compact-warnings
         }
 
         if ($plan)
         {
             Write-Output "Plan"
-            terraform plan -var-file="..\terraform.tfvars" -var "access_key=$ACCESS_KEY" -compact-warnings
+            terraform plan -var-file="../terraform.tfvars" -var "access_key=$ACCESS_KEY" -compact-warnings
         }
 
         if ($apply)
         {
             Write-Output "Apply"
-            terraform apply -var-file="..\terraform.tfvars" -var "access_key=$ACCESS_KEY" -auto-approve -compact-warnings
+            terraform apply -var-file="../terraform.tfvars" -var "access_key=$ACCESS_KEY" -auto-approve -compact-warnings
         }
 
         if ($destroy)
         {
             Write-Output "Destroy"
-            terraform destroy -var-file="..\terraform.tfvars" -var "access_key=$ACCESS_KEY" -auto-approve -compact-warnings
+            terraform destroy -var-file="../terraform.tfvars" -var "access_key=$ACCESS_KEY" -auto-approve -compact-warnings
         }
     }
     catch {
