@@ -47,7 +47,7 @@ Function tf {
         if ($destroy)
         {
             Write-Output "Destroy"
-            terraform destroy -var-file="..\terraform.tfvars" -var "access_key=$ACCESS_KEY"
+            terraform destroy -var-file="..\terraform.tfvars" -var "access_key=$ACCESS_KEY" -auto-approve -compact-warnings
         }
     }
     catch {
@@ -59,3 +59,4 @@ Function tf {
 }
 
 Export-ModuleMember -Function tf
+

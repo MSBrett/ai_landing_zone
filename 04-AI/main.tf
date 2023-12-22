@@ -1,0 +1,40 @@
+########
+# DATA #
+########
+
+# Data From Existing Infrastructure
+
+data "terraform_remote_state" "aad" {
+  backend = "azurerm"
+
+  config = {
+    storage_account_name = var.state_sa_name
+    container_name       = var.container_name
+    key                  = "aad"
+    access_key           = var.access_key
+  }
+}
+
+data "terraform_remote_state" "network" {
+  backend = "azurerm"
+
+  config = {
+    storage_account_name = var.state_sa_name
+    container_name       = var.container_name
+    key                  = "network"
+    access_key           = var.access_key
+  }
+}
+
+data "terraform_remote_state" "support" {
+  backend = "azurerm"
+
+  config = {
+    storage_account_name = var.state_sa_name
+    container_name       = var.container_name
+    key                  = "support"
+    access_key           = var.access_key
+  }
+}
+
+data "azurerm_client_config" "current" {}
