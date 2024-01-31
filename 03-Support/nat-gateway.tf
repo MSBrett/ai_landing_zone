@@ -20,6 +20,11 @@ resource "azurerm_nat_gateway_public_ip_association" "nat_gateway" {
   public_ip_address_id = azurerm_public_ip.nat_gateway.id
 }
 
+resource "azurerm_subnet_nat_gateway_association" "devSubnet" {
+  subnet_id      = azurerm_subnet.dev_subnet.id
+  nat_gateway_id = azurerm_nat_gateway.nat_gateway.id
+}
+
 output "nat_gateway_id" {
   value = azurerm_nat_gateway.nat_gateway.id
 }
