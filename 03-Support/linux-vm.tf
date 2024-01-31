@@ -96,6 +96,27 @@ resource "azurerm_dev_test_global_vm_shutdown_schedule" "vm_shutdown_schedule" {
   }
  }
 
+resource "azurerm_virtual_machine_extension" "ssh" {
+  name                 = "AADLogin"
+  virtual_machine_id   = azurerm_linux_virtual_machine.compute.id
+  publisher            = "Microsoft.Azure.ActiveDirectory"
+  type                 = "AADSSHLoginForLinux"
+  type_handler_version = "1.0"
+}
+
+resource "azurerm_role_assignment" "ssh_admin" {
+  scope                = azurerm_linux_virtual_machine.compute.id
+  role_definition_name = "Virtual Machine Administrator Login"
+  principal_id         = data.terraform_remote_state.aad.outputs.aksops_object_id
+}
+
+resource "azurerm_role_assignment" "ssh_user" {
+  scope                = azurerm_linux_virtual_machine.compute.id
+  role_definition_name = "Virtual Machine User Login"
+  principal_id         = data.terraform_remote_state.aad.outputs.appdev_object_id
+}
+
+
 output "vm_private_ip_address" {
   value = azurerm_network_interface.compute.ip_configuration[0].private_ip_address
 }
@@ -162,7 +183,4 @@ variable "allocation_method" {
   default = "Static"
 }
 
-resource "azurerm_subnet_nat_gateway_association" "devSubnet" {
-  subnet_id      = azurerm_subnet.dev_subnet.id
-  nat_gateway_id = azurerm_nat_gateway.nat_gateway.id
-}
+
