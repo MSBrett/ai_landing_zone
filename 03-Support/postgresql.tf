@@ -30,21 +30,21 @@ resource "azurerm_subnet_network_security_group_association" "postgresql_nsg" {
 }
 
 resource "azurerm_private_dns_zone" "postgresql_dns" {
-  name                = "postgresql-${random_integer.deployment.result}-pdz.postgres.database.azure.com"
+  name                = "psql${random_integer.deployment.result}-pdz.postgres.database.azure.com"
   resource_group_name = data.terraform_remote_state.network.outputs.workload_rg_name
 
   depends_on = [azurerm_subnet_network_security_group_association.postgresql_nsg]
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "postgresql" {
-  name                  = "postgresql-${random_integer.deployment.result}-pdzvnetlink.com"
+  name                  = "psql${random_integer.deployment.result}-pdzvnetlink.com"
   private_dns_zone_name = azurerm_private_dns_zone.postgresql_dns.name
   virtual_network_id    = data.terraform_remote_state.network.outputs.workload_vnet_id
   resource_group_name   = data.terraform_remote_state.network.outputs.workload_rg_name
 }
 
 resource "azurerm_postgresql_flexible_server" "postgresql_flexible_server" {
-  name                   = "postgresql-${random_integer.deployment.result}"
+  name                   = "psql${random_integer.deployment.result}"
   resource_group_name    = data.terraform_remote_state.network.outputs.workload_rg_name
   location               = data.terraform_remote_state.network.outputs.workload_rg_location
   version                = "13"
