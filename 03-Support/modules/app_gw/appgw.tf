@@ -16,7 +16,12 @@ resource "azurerm_application_gateway" "agw" {
   sku {
     name     = "WAF_v2"
     tier     = "WAF_v2"
-    capacity = 2
+    #capacity = 0
+  }
+
+  autoscale_configuration {
+    min_capacity = 0
+    max_capacity = 2
   }
 
   gateway_ip_configuration {
