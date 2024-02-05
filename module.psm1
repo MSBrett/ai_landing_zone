@@ -3,10 +3,13 @@ Function tf {
         [String]$folderName,
         [switch]$apply,
         [switch]$init,
+        [switch]$import,
         [switch]$plan,
         [switch]$destroy,
         [switch]$refresh,
-        [string]$backend="./backend.json"
+        [string]$backend="./backend.json",
+        [string]$resource,
+        [string]$id
     )
 
     Push-Location
@@ -24,6 +27,12 @@ Function tf {
         {
             Write-Output "Init"
             terraform init -backend-config="resource_group_name=$TFSTATE_RG" -backend-config="storage_account_name=$STORAGEACCOUNTNAME" -backend-config="container_name=$CONTAINERNAME" -reconfigure -upgrade
+        }
+
+        if ($import)
+        {
+            Write-Output "Import"
+            terraform import -var-file="../terraform.tfvars" -var "access_key=$ACCESS_KEY" $resource $id
         }
 
         if ($refresh)

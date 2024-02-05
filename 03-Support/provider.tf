@@ -7,6 +7,11 @@ terraform {
     random = {
       version = ">=3.0"
     }
+
+    azapi = {
+      source  = "Azure/azapi"
+      version = ">=1.12.0"
+    }
   }
   backend "azurerm" {
     # resource_group_name  = ""   # Partial configuration, provided during "terraform init"

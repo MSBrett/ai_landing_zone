@@ -221,6 +221,7 @@ resource "azurerm_api_management" "apim" {
   depends_on = [ azurerm_subnet_network_security_group_association.apim_subnet_nsg_association ]
 }
 
+
 output "apim_principal_id" {
   value = azurerm_api_management.apim.identity[0].principal_id
 }

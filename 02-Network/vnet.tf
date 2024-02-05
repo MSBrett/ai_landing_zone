@@ -11,6 +11,12 @@ resource "azurerm_virtual_network" "workload_vnet" {
   tags                = var.tags
 }
 
+resource "azurerm_network_ddos_protection_plan" "ddos_plan" {
+  name                = "ddos-protection-plan"
+  location            = azurerm_resource_group.workload_rg.location
+  resource_group_name = azurerm_resource_group.workload_rg.name
+}
+
 # OUTPUTS
 # -------
 
@@ -20,4 +26,12 @@ output "workload_vnet_name" {
 
 output "workload_vnet_id" {
   value = azurerm_virtual_network.workload_vnet.id
+}
+
+output "ddos_plan_name" {
+  value = azurerm_network_ddos_protection_plan.ddos_plan.name
+}
+
+output "ddos_plan_id" {
+  value = azurerm_network_ddos_protection_plan.ddos_plan.id
 }

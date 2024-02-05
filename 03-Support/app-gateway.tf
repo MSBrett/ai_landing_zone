@@ -42,6 +42,8 @@ resource "azurerm_public_ip" "appgw" {
   location            = data.terraform_remote_state.network.outputs.workload_rg_location
   allocation_method   = "Static"
   sku                 = "Standard"
+  ddos_protection_mode = "Enabled"
+  ddos_protection_plan_id = data.terraform_remote_state.network.outputs.ddos_plan_id
 }
 
 # based on the structure of the appgws map are deployed multiple appplication gateway, usually this is used in the blue green scenario

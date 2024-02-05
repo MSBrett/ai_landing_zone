@@ -66,4 +66,3 @@ resource "azurerm_key_vault_access_policy" "aks-aad_cp_identity-rt" {
     "Get", "List"
   ]
 }
-

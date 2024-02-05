@@ -27,7 +27,7 @@ output "storage_account_id" {
 }
 
 resource "azurerm_storage_share" "share1" {
-  name                 = "share1"
+  name                 = "data"
   storage_account_name = azurerm_storage_account.storage_account.name
   quota                = 1024
   enabled_protocol     = "NFS"

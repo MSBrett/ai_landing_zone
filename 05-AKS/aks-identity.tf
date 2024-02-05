@@ -94,6 +94,13 @@ resource "azurerm_role_assignment" "agic_appgw" {
   principal_id         = each.value.agic_id
 }
 
+resource "azurerm_role_assignment" "agic_vnet" {
+  for_each             = module.aks
+  scope                = data.terraform_remote_state.network.outputs.workload_vnet_id
+  role_definition_name = "Contributor"
+  principal_id         = each.value.agic_id
+}
+
 # These resources will set up the required permissions for 
 # AAD Pod Identity (v1)
 
